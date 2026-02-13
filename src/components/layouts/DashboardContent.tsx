@@ -2,9 +2,10 @@ import { Globe, LayoutDashboard, Tags, UserPlus } from "lucide-react";
 import { Button } from "../ui/button";
 import ClientesPorStatusChart from "../dashboard/ClientesPorStatus";
 import ClientesPorUsuarioChart from "../dashboard/ClientesPorUsuario";
-import KPIConversaoChart from "../dashboard/KPIConversao";
 import TempoPorStatusChart from "../dashboard/TempoPorStatus";
 import type { KPIView } from "@/pages/Dashboard";
+import KPIConversaoChart from "../dashboard/KPIConversao";
+// import ConversaoPorUsuarioChart from "../dashboard/KPIConversaoUsuario";
 // import type { KPIView } from "./Layout";
 
 

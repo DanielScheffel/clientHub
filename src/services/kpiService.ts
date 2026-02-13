@@ -11,9 +11,9 @@ export const getClientesPorUsuario = async () => {
   return response.data;
 };
 
-export const getConversaoGlobal = async () => {
-  const response = await api.get("dashboard/kpis/conversao?tipo=global");
-  return response.data.dados;
+export const getConversaoGlobal = async (tipo: "global" | "usuario") => {
+  const response = await api.get(`dashboard/kpis/conversao?tipo=${tipo}`);
+  return response.data;
 };
 
 export const getTempoStatus = async () => {
