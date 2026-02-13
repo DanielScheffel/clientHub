@@ -1,12 +1,10 @@
-import { Globe, LayoutDashboard, Tags, UserPlus } from "lucide-react";
+import { Globe, LayoutDashboard, Plus, Tags, UserPlus } from "lucide-react";
 import { Button } from "../ui/button";
 import ClientesPorStatusChart from "../dashboard/ClientesPorStatus";
 import ClientesPorUsuarioChart from "../dashboard/ClientesPorUsuario";
 import TempoPorStatusChart from "../dashboard/TempoPorStatus";
 import type { KPIView } from "@/pages/Dashboard";
-import KPIConversaoChart from "../dashboard/KPIConversao";
-// import ConversaoPorUsuarioChart from "../dashboard/KPIConversaoUsuario";
-// import type { KPIView } from "./Layout";
+import CategoriasChart from "../dashboard/CategoriasChart";
 
 
 interface DashboardContentProps {
@@ -45,9 +43,14 @@ export function DashboardContent({ selectedKPI, onKPIChange }: DashboardContentP
             <div className="space-y-6">
                 {selectedKPI === 'overview' && <ClientesPorStatusChart />}
                 {selectedKPI === 'cadastros' && <ClientesPorUsuarioChart />}
-                {selectedKPI === 'categorias' && <KPIConversaoChart />}
+                {selectedKPI === 'categorias' && <CategoriasChart />}
                 {selectedKPI === 'origem' && <TempoPorStatusChart />}
             </div>
+
+    
+            <Button className="fixed top-20 right-6 bg-blue-600 hover:bg-blue-700 shadow-lg z-30">
+                <Plus className="w-4 h-4" /> Novo Cliente
+            </Button>
         </div>
     )
 }

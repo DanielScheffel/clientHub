@@ -41,8 +41,13 @@ export default function ClientesPorStatusChart() {
     }
 
     return (
-        <div className="w-full h-100">
-            <Bar data={chartData} options={options} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Clientes Por Status</h3>
+                    <div className="w-full h-100">
+                        <Bar data={chartData} options={options} />
+                    </div>
+            </div>
         </div>
     )
 }
