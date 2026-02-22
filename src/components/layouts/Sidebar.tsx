@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 interface Props {
     collapsed: boolean;
+    
 }
 
 export default function Sidebar({ collapsed }: Props) {

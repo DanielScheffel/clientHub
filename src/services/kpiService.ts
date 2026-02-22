@@ -25,3 +25,13 @@ export const getTipoCliente = async () => {
     const response = await api.get("dashboard/kpis/tipo-cliente");
     return response.data;
 }
+
+export const getClientesPorUsuario = async () => {
+    const response = await api.get("dashboard/kpis/cliente-por-usuario");
+    return response.data;
+}
+
+export const postUltimosDias = async () => {
+    const response = await api.post("dashboard/kpis/clientes/ultimos-dias");
+    return response.data;
+}

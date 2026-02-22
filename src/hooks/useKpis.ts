@@ -1,4 +1,10 @@
-import { getClientesOrigem, getClientesPorStatus, getClientesTotal, getConversaoGlobal, getTipoCliente } from "@/services/kpiService";
+import { getClientesOrigem, 
+    getClientesPorStatus, 
+    getClientesPorUsuario, 
+    getClientesTotal, 
+    getConversaoGlobal, 
+    getTipoCliente } 
+from "@/services/kpiService";
 import { useEffect, useState } from "react";
 
 
@@ -28,6 +34,12 @@ interface tipoCliente {
     percentual: number;
 }
 
+interface ClientePorUsuario {
+    id_usuario: number;
+    nome: string;
+    total_clientes: string;
+}
+
 export function useClientesPorStatus() {
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -52,6 +64,24 @@ export function useClientesTotal() {
     }, [])
 
     return { data, loading };
+}
+
+export function useClientesPorUsuario() {
+    const [data, setData] = useState<ClientePorUsuario[]>([])
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getClientesPorUsuario()
+            .then((result) => {
+                setData(result || []);
+            })
+            .catch(() => {
+                setData([]);
+            })
+            .finally(() => setLoading(false))
+    }, [])
+
+    return { data, loading }
 }
 
 export function useConversaoGlobal() {

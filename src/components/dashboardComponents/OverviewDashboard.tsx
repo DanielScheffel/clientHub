@@ -51,14 +51,9 @@ export default function OverviewDashboard() {
                 label: "Tipo de Clientes",
                 data: tipoData.map((item) => item.quantidade),
                 backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
+                        'rgba(255, 99, 132)',
+                        'rgba(75, 192, 192)',
+                        'rgba(54, 162, 235)',
                     ],
                 borderWidth: 1,
             }
