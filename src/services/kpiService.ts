@@ -31,7 +31,22 @@ export const getClientesPorUsuario = async () => {
     return response.data;
 }
 
-export const postUltimosDias = async () => {
-    const response = await api.post("dashboard/kpis/clientes/ultimos-dias");
+export const getClientesFunil = async () => {
+    const response = await api.get("dashboard/kpis/funil");
+    return response.data;
+}
+
+export const getClienteMes = async () => {
+    const response = await api.get("dashboard/kpis/clientes/mes");
+    return response.data;
+}
+
+// export const postUltimosDias = async (dias: number) => {
+//     const response = await api.post("dashboard/kpis/clientes/ultimos-dias", {dias});
+//     return response.data;
+// }
+
+export const getUltimosDias = async (dias: number) => {
+    const response = await api.get("dashboard/kpis/clientes/ultimos-dias", { params: { dias }});
     return response.data;
 }

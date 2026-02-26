@@ -1,4 +1,4 @@
-import { getClientesOrigem, 
+import { getClientesFunil, getClientesOrigem, 
     getClientesPorStatus, 
     getClientesPorUsuario, 
     getClientesTotal, 
@@ -14,13 +14,13 @@ interface ConversaoGlobal {
     taxa_conversao: string | null;
 }
 
-// interface ConversaoPorUsuario {
-//     id_usuario: number;
-//     nome: string;
-//     fechados: string;
-//     total: string;
-//     taxa_conversao: string | null;
-// }
+interface ConversaoPorUsuario {
+    id_usuario: number;
+    nome: string;
+    fechados: number;
+    total: number;
+    taxa_conversao: number;
+}
 
 interface Origem {
     origem: string;
@@ -38,6 +38,21 @@ interface ClientePorUsuario {
     id_usuario: number;
     nome: string;
     total_clientes: string;
+}
+
+interface ClienteFunil {
+    status: string;
+    status_labels: string;
+    total: number;
+    percentual: number;
+}
+
+const STATUS_LABELS: Record<string, string> = {
+    novo: "Novo",
+    negociacao: "Negociação",
+    fechado: "Fechado",
+    contatado: "Contatado",
+    perdido: "Perdido",
 }
 
 export function useClientesPorStatus() {
@@ -97,6 +112,28 @@ export function useConversaoGlobal() {
     return { data, loading }
 }
 
+export function useConversaoUsuario() {
+    const [data, setData] = useState<ConversaoPorUsuario | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getConversaoGlobal("usuario")
+            .then((response: ConversaoPorUsuario[]) => {
+                if(!response.length) return;
+
+                const topUsuario = response.reduce((maior, atual) =>
+                    atual.fechados > maior.fechados ? atual : maior
+                );
+
+                setData(topUsuario);
+            })
+
+            .finally(() => setLoading(false))
+    }, []);
+
+    return { data, loading }
+}
+
 export function useClienteOrigem() {
     const [data, setData] = useState<Origem | null>(null);
     const [loading, setLoading] = useState(true);
@@ -132,6 +169,26 @@ export function useClientePorTipo() {
                 setData(formatted)
             })
             .finally(() => setLoading(false));
+    }, [])
+
+    return { data, loading }
+}
+
+export function useClienteFunil() {
+    const [data, setData] = useState<ClienteFunil[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getClientesFunil()
+            .then((response: ClienteFunil[]) => {
+                const formatted = response.map(item => ({
+                    ...item,
+                    status_labels: STATUS_LABELS[item.status] ?? item.status,
+                }))
+
+                setData(formatted);
+            })
+            .finally(() => setLoading(false))
     }, [])
 
     return { data, loading }
